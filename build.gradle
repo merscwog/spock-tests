@@ -1,3 +1,27 @@
+// NOTE: Reference can be found here:
+// https://github.com/spockframework/spock-example/blob/master/build.gradle
+
+apply plugin: 'groovy'
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  // NOTE: Only commpile dependency for groovy code, not test code
+  compile 'org.codehaus.groovy:groovy-all:2.4.3'
+  testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+  testRuntime 'cglib:cglib-nodep:3.1'        // Mocking
+  testRuntime 'org.objenesis:objenesis:2.1'  // Mocking no default constructor
+}
+
+// NOTE: We want to see full details of failures in console output
+test {
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
+
 task wrapper(type: Wrapper) {
   gradleVersion = '2.3'
 }
